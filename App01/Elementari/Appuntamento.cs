@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace App01.Elementari
 {
-    public class Appuntamento
+    public class Appuntamento : Sicurezza
     {
         public string Nota {  get; set; }
         public DateOnly Giorno { get; set; }
@@ -14,7 +14,7 @@ namespace App01.Elementari
         public TimeOnly Alle { get; set; }
         public string ToString()
         {
-            return $"{Nota}\t{Giorno}\t{Dalle}\t{Alle}";
+            return $"{Nota}\t{Giorno}\t{Dalle}\t{Alle}\t{Creazione}";
         }
     }
 }

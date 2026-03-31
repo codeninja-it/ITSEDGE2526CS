@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace App01.Elementari
 {
-    public class Agenda
+    public class Agenda : Sicurezza
     {
         public string Nome { get; set; }
-        public DateTime Creazione {get;set;} = DateTime.Now;
         public List<Appuntamento> appuntamenti { get; set; }
         public Agenda(string nome)
         {
