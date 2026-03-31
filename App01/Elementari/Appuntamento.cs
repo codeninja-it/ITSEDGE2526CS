@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace App01.Elementari
 {
-    internal class Appuntamento
+    public class Appuntamento
     {
-        internal string Nota {  get; set; }
-        internal DateOnly Giorno { get; set; }
-        internal TimeOnly Dalle { get; set; }
-        internal TimeOnly Alle { get; set; }
+        public string Nota {  get; set; }
+        public DateOnly Giorno { get; set; }
+        public TimeOnly Dalle { get; set; }
+        public TimeOnly Alle { get; set; }
+        public string ToString()
+        {
+            return $"{Nota}\t{Giorno}\t{Dalle}\t{Alle}";
+        }
     }
 }
