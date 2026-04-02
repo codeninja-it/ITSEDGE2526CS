@@ -14,7 +14,12 @@ namespace App03
         {
             Contatto nuovo = new Contatto();
             FormContatto nuovaFinestra = new FormContatto(nuovo);
-            nuovaFinestra.ShowDialog();
+            DialogResult risultato = nuovaFinestra.ShowDialog();
+            if (risultato == DialogResult.OK)
+            {
+                rubrica.Add(nuovo);
+                lstContatti.Items.Add(nuovo);
+            }                
         }
     }
 }

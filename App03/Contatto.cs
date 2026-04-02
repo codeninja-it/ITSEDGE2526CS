@@ -11,5 +11,11 @@ namespace App03
         public string Nome { get; set; }
         public string Cognome { get; set; }
         public string Email { get; set; }
+
+        public override string ToString()
+        {
+            string tipo = base.ToString();
+            return $"{Nome} {Cognome} ({Email}) <{tipo}>";
+        }
     }
 }

@@ -18,16 +18,23 @@ namespace App03
         {
             this.contatto = contatto;
             InitializeComponent();
+            txtNome.Text = contatto.Nome;
+            txtCognome.Text = contatto.Cognome;
+            txtEmail.Text = contatto.Email;
         }
 
         private void btnSalva_Click(object sender, EventArgs e)
         {
-            contatto.Nome = "Gianni";
+            contatto.Nome = txtNome.Text;
+            contatto.Cognome = txtCognome.Text;
+            contatto.Email = txtEmail.Text;
+            this.DialogResult = DialogResult.OK;
             Close();
         }
 
         private void btnAnnulla_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             Close();
         }
     }
