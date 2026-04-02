@@ -30,13 +30,27 @@ namespace App02
                         break;
 
                     case "REMOVE":
-                        int daRimuovere = int.Parse(Chiedi("Dammi il numero di quello da rimuovere: "));
-                        rubrica.RemoveAt(daRimuovere);
+                        //int daRimuovere = int.Parse(Chiedi("Dammi il numero di quello da rimuovere: "));
+                        //rubrica.RemoveAt(daRimuovere);
+                        string chi = Chiedi("Dammi il nome o cognome di chi vuoi rimuovere: ");
+                        rubrica.RemoveAll(c => c.Nome == chi || c.Cognome == chi);
                         break;
 
                     case "SAVE":
                         string fileName = Chiedi("Dammi il nome del file: ");
                         File.WriteAllText(fileName, JsonSerializer.Serialize(rubrica));
+                        break;
+
+                    case "LOAD":
+                        string pathFile = Chiedi("Dammi il nome del file: ");
+                        if (File.Exists(pathFile))
+                        {
+                            string buffer = File.ReadAllText(pathFile);
+                            rubrica = JsonSerializer.Deserialize< List<Contatto> >(buffer);
+                        } else
+                        {
+                            Chiedi("File non trovato, premi invio per continuare...");
+                        }
                         break;
 
                     default:
