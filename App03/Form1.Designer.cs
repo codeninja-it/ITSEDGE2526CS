@@ -52,6 +52,9 @@
             lstContatti.Name = "lstContatti";
             lstContatti.Size = new Size(1074, 809);
             lstContatti.TabIndex = 1;
+            lstContatti.SelectedValueChanged += lstContatti_SelectedValueChanged;
+            lstContatti.KeyDown += lstContatti_KeyDown;
+            lstContatti.KeyUp += lstContatti_KeyUp;
             // 
             // Form1
             // 
