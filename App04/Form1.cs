@@ -53,5 +53,30 @@ namespace App04
             paint.Clear(Color.White);
             pctImmagine.Invalidate();
         }
+
+        private void mnuApri_Click(object sender, EventArgs e)
+        {
+            dlgApri.Title = "Seleziona l'immagine da aprire";
+            dlgApri.Filter = "File JPG|*.jpg|File PNG|*.png|Tutti i files|*.*";
+            DialogResult risultato = dlgApri.ShowDialog();
+            if (risultato == DialogResult.OK)
+            {
+                string immagineDaAprire = dlgApri.FileName;
+                pctImmagine.Image = new Bitmap(immagineDaAprire);
+                paint = Graphics.FromImage(pctImmagine.Image);
+            }
+        }
+
+        private void mnuSalva_Click(object sender, EventArgs e)
+        {
+            dlgSalva.Title = "Seleziona l'immagine da aprire";
+            dlgSalva.Filter = "File JPG|*.jpg|File PNG|*.png|Tutti i files|*.*";
+            DialogResult risultato = dlgSalva.ShowDialog();
+            if(risultato == DialogResult.OK)
+            {
+                string percorso = dlgSalva.FileName;
+                pctImmagine.Image.Save(percorso);
+            }
+        }
     }
 }

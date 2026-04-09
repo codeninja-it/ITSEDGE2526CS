@@ -38,6 +38,8 @@
             mnuEsci = new ToolStripMenuItem();
             modificaToolStripMenuItem = new ToolStripMenuItem();
             pctImmagine = new PictureBox();
+            dlgApri = new OpenFileDialog();
+            dlgSalva = new SaveFileDialog();
             statusStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pctImmagine).BeginInit();
@@ -65,7 +67,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, modificaToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1372, 40);
+            menuStrip1.Size = new Size(1372, 42);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -73,52 +75,59 @@
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mnuNuovo, mnuApri, mnuSalva, mnuEsci });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(71, 36);
+            fileToolStripMenuItem.Size = new Size(71, 38);
             fileToolStripMenuItem.Text = "File";
             // 
             // mnuNuovo
             // 
             mnuNuovo.Name = "mnuNuovo";
-            mnuNuovo.Size = new Size(219, 44);
+            mnuNuovo.Size = new Size(359, 44);
             mnuNuovo.Text = "Nuovo";
             mnuNuovo.Click += mnuNuovo_Click;
             // 
             // mnuApri
             // 
             mnuApri.Name = "mnuApri";
-            mnuApri.Size = new Size(219, 44);
+            mnuApri.Size = new Size(359, 44);
             mnuApri.Text = "Apri";
+            mnuApri.Click += mnuApri_Click;
             // 
             // mnuSalva
             // 
             mnuSalva.Name = "mnuSalva";
-            mnuSalva.Size = new Size(219, 44);
+            mnuSalva.Size = new Size(359, 44);
             mnuSalva.Text = "Salva";
+            mnuSalva.Click += mnuSalva_Click;
             // 
             // mnuEsci
             // 
             mnuEsci.Name = "mnuEsci";
-            mnuEsci.Size = new Size(219, 44);
+            mnuEsci.Size = new Size(359, 44);
             mnuEsci.Text = "Esci";
             mnuEsci.Click += mnuEsci_Click;
             // 
             // modificaToolStripMenuItem
             // 
             modificaToolStripMenuItem.Name = "modificaToolStripMenuItem";
-            modificaToolStripMenuItem.Size = new Size(127, 36);
+            modificaToolStripMenuItem.Size = new Size(127, 38);
             modificaToolStripMenuItem.Text = "Modifica";
             // 
             // pctImmagine
             // 
             pctImmagine.BackColor = Color.Black;
             pctImmagine.Dock = DockStyle.Fill;
-            pctImmagine.Location = new Point(0, 40);
+            pctImmagine.Location = new Point(0, 42);
             pctImmagine.Name = "pctImmagine";
-            pctImmagine.Size = new Size(1372, 814);
+            pctImmagine.Size = new Size(1372, 812);
             pctImmagine.SizeMode = PictureBoxSizeMode.StretchImage;
             pctImmagine.TabIndex = 2;
             pctImmagine.TabStop = false;
             pctImmagine.MouseMove += PctImmagine_MouseMove;
+            // 
+            // dlgApri
+            // 
+            dlgApri.FileName = "openFileDialog1";
+            dlgApri.Title = "Seleziona immagine...";
             // 
             // Form1
             // 
@@ -152,5 +161,7 @@
         private ToolStripMenuItem modificaToolStripMenuItem;
         private ToolStripMenuItem mnuNuovo;
         private PictureBox pctImmagine;
+        private OpenFileDialog dlgApri;
+        private SaveFileDialog dlgSalva;
     }
 }
