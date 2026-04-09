@@ -9,30 +9,49 @@ namespace App04
         public Form1()
         {
             InitializeComponent();
-            this.BackgroundImage = new Bitmap(this.Width, this.Height);
-            paint = Graphics.FromImage(this.BackgroundImage);
+            pctImmagine.Image = new Bitmap(this.Width, this.Height);
+            paint = Graphics.FromImage(pctImmagine.Image);
             paint.Clear(Color.White);
             matita = new Pen(Brushes.MediumSeaGreen, 3);
         }
 
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        private void PctImmagine_MouseMove(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
+                int altezzaSchermo = pctImmagine.Height;
+                int altezzaImmagine = pctImmagine.Image.Height;
+                float rapportoH = (float)altezzaImmagine / (float)altezzaSchermo;
+                float rapportoW = (float)pctImmagine.Image.Width / (float)pctImmagine.Width;
+                Point attuale = new Point((int)(e.X * rapportoW), (int)(e.Y * rapportoH));
+
                 if (precedente == null)
                 {
-                    precedente = e.Location;
+                    precedente = attuale;
                     return;
                 }
 
-                Point attuale = e.Location;
                 paint.DrawLine(matita, precedente.Value, attuale);
                 precedente = attuale;
-                this.Invalidate();
-            } else
+                pctImmagine.Invalidate();
+            }
+            else
             {
                 precedente = null;
-            }            
+            }
+        }
+
+        private void mnuEsci_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void mnuNuovo_Click(object sender, EventArgs e)
+        {
+            pctImmagine.Image = new Bitmap(this.Width, this.Height);
+            paint = Graphics.FromImage(pctImmagine.Image);
+            paint.Clear(Color.White);
+            pctImmagine.Invalidate();
         }
     }
 }
