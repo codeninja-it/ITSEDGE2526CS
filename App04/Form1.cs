@@ -5,6 +5,7 @@ namespace App04
         private Graphics paint;
         private Pen matita;
         private List<Point> ultimiPunti = new List<Point>();
+        private Impostazioni impostazioni = new Impostazioni();
 
         public Form1()
         {
@@ -12,7 +13,7 @@ namespace App04
             pctImmagine.Image = new Bitmap(this.Width, this.Height);
             paint = Graphics.FromImage(pctImmagine.Image);
             paint.Clear(Color.White);
-            matita = new Pen(Brushes.MediumSeaGreen, 3);
+            matita = new Pen(impostazioni.Colore, impostazioni.Tratto);
         }
 
         private void PctImmagine_MouseMove(object sender, MouseEventArgs e)
@@ -25,7 +26,7 @@ namespace App04
                 float rapportoW = (float)pctImmagine.Image.Width / (float)pctImmagine.Width;
                 Point attuale = new Point((int)(e.X * rapportoW), (int)(e.Y * rapportoH));
 
-                DisegnaLinea(attuale);
+                DisegnaLinea(attuale, impostazioni.Finestra);
             }
             else
             {
