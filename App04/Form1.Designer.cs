@@ -81,28 +81,28 @@
             // mnuNuovo
             // 
             mnuNuovo.Name = "mnuNuovo";
-            mnuNuovo.Size = new Size(359, 44);
+            mnuNuovo.Size = new Size(219, 44);
             mnuNuovo.Text = "Nuovo";
             mnuNuovo.Click += mnuNuovo_Click;
             // 
             // mnuApri
             // 
             mnuApri.Name = "mnuApri";
-            mnuApri.Size = new Size(359, 44);
+            mnuApri.Size = new Size(219, 44);
             mnuApri.Text = "Apri";
             mnuApri.Click += mnuApri_Click;
             // 
             // mnuSalva
             // 
             mnuSalva.Name = "mnuSalva";
-            mnuSalva.Size = new Size(359, 44);
+            mnuSalva.Size = new Size(219, 44);
             mnuSalva.Text = "Salva";
             mnuSalva.Click += mnuSalva_Click;
             // 
             // mnuEsci
             // 
             mnuEsci.Name = "mnuEsci";
-            mnuEsci.Size = new Size(359, 44);
+            mnuEsci.Size = new Size(219, 44);
             mnuEsci.Text = "Esci";
             mnuEsci.Click += mnuEsci_Click;
             // 
@@ -111,6 +111,7 @@
             modificaToolStripMenuItem.Name = "modificaToolStripMenuItem";
             modificaToolStripMenuItem.Size = new Size(127, 38);
             modificaToolStripMenuItem.Text = "Modifica";
+            modificaToolStripMenuItem.Click += modificaToolStripMenuItem_Click;
             // 
             // pctImmagine
             // 

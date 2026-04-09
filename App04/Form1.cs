@@ -39,11 +39,11 @@ namespace App04
             // se ho almeno un punto
             // devo calcolare il punto medio di tutti i precedenti
             // ed è lui che deve essere registrato
-            if(ultimiPunti.Count > 1)
+            if (ultimiPunti.Count > 1)
             {
                 // ne calcolo la media
                 Point puntoMedio = new Point(
-                    (ultimiPunti.Sum(p => p.X) + b.X) / (ultimiPunti.Count + 1), 
+                    (ultimiPunti.Sum(p => p.X) + b.X) / (ultimiPunti.Count + 1),
                     (ultimiPunti.Sum(p => p.Y) + b.Y) / (ultimiPunti.Count + 1)
                 );
                 // per disegnare la mia linea devo usare
@@ -59,13 +59,14 @@ namespace App04
                 if (ultimiPunti.Count > finestra)
                     ultimiPunti.RemoveAt(0);
                 // e alla fine tengo memoria di quello nuovo
-                ultimiPunti.Add( puntoMedio );
-            } else
+                ultimiPunti.Add(puntoMedio);
+            }
+            else
             {
                 // registro b perchè non posso calcolare alcun punto medio
                 ultimiPunti.Add(b);
             }
-            
+
         }
 
         private void mnuEsci_Click(object sender, EventArgs e)
@@ -99,10 +100,21 @@ namespace App04
             dlgSalva.Title = "Seleziona l'immagine da aprire";
             dlgSalva.Filter = "File JPG|*.jpg|File PNG|*.png|Tutti i files|*.*";
             DialogResult risultato = dlgSalva.ShowDialog();
-            if(risultato == DialogResult.OK)
+            if (risultato == DialogResult.OK)
             {
                 string percorso = dlgSalva.FileName;
                 pctImmagine.Image.Save(percorso);
+            }
+        }
+
+        private void modificaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormImpostazioni nuovo = new FormImpostazioni(impostazioni);
+            DialogResult risultato = nuovo.ShowDialog();
+            if(risultato == DialogResult.OK)
+            {
+                // aggiornare la mia matita
+                matita = new Pen(impostazioni.Colore, impostazioni.Tratto);
             }
         }
     }
