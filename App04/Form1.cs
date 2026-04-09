@@ -4,7 +4,7 @@ namespace App04
     {
         private Graphics paint;
         private Pen matita;
-        private Point? precedente;
+        private List<Point> ultimiPunti = new List<Point>();
 
         public Form1()
         {
@@ -25,20 +25,46 @@ namespace App04
                 float rapportoW = (float)pctImmagine.Image.Width / (float)pctImmagine.Width;
                 Point attuale = new Point((int)(e.X * rapportoW), (int)(e.Y * rapportoH));
 
-                if (precedente == null)
-                {
-                    precedente = attuale;
-                    return;
-                }
-
-                paint.DrawLine(matita, precedente.Value, attuale);
-                precedente = attuale;
-                pctImmagine.Invalidate();
+                DisegnaLinea(attuale);
             }
             else
             {
-                precedente = null;
+                ultimiPunti.Clear();
             }
+        }
+
+        private void DisegnaLinea(Point b, int finestra = 2)
+        {
+            // se ho almeno un punto
+            // devo calcolare il punto medio di tutti i precedenti
+            // ed è lui che deve essere registrato
+            if(ultimiPunti.Count > 1)
+            {
+                // ne calcolo la media
+                Point puntoMedio = new Point(
+                    (ultimiPunti.Sum(p => p.X) + b.X) / (ultimiPunti.Count + 1), 
+                    (ultimiPunti.Sum(p => p.Y) + b.Y) / (ultimiPunti.Count + 1)
+                );
+                // per disegnare la mia linea devo usare
+                // il punto medio e da quello che avevo calcolato la volta scorsa
+                //Point precedenteMedio = ultimiPunti[ultimiPunti.Count - 1];
+                //Point precedenteMedio = ultimiPunti[-1];
+                Point precedenteMedio = ultimiPunti.Last();
+                paint.DrawLine(matita, precedenteMedio, puntoMedio);
+                pctImmagine.Invalidate();
+                // e se ho oltrepassato gli elementi da registrare
+                // per evitare di finire in cavitazione
+                // ammazzo il più vecchio
+                if (ultimiPunti.Count > finestra)
+                    ultimiPunti.RemoveAt(0);
+                // e alla fine tengo memoria di quello nuovo
+                ultimiPunti.Add( puntoMedio );
+            } else
+            {
+                // registro b perchè non posso calcolare alcun punto medio
+                ultimiPunti.Add(b);
+            }
+            
         }
 
         private void mnuEsci_Click(object sender, EventArgs e)
