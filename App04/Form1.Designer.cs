@@ -30,6 +30,7 @@
         {
             statusStrip1 = new StatusStrip();
             lblCoordinate = new ToolStripStatusLabel();
+            lblTinta = new ToolStripStatusLabel();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             mnuNuovo = new ToolStripMenuItem();
@@ -50,7 +51,7 @@
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new Size(32, 32);
-            statusStrip1.Items.AddRange(new ToolStripItem[] { lblCoordinate });
+            statusStrip1.Items.AddRange(new ToolStripItem[] { lblCoordinate, lblTinta });
             statusStrip1.Location = new Point(0, 981);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(1250, 42);
@@ -62,6 +63,12 @@
             lblCoordinate.Name = "lblCoordinate";
             lblCoordinate.Size = new Size(64, 32);
             lblCoordinate.Text = "0 - 0";
+            // 
+            // lblTinta
+            // 
+            lblTinta.Name = "lblTinta";
+            lblTinta.Size = new Size(21, 32);
+            lblTinta.Text = " ";
             // 
             // menuStrip1
             // 
@@ -83,28 +90,28 @@
             // mnuNuovo
             // 
             mnuNuovo.Name = "mnuNuovo";
-            mnuNuovo.Size = new Size(359, 44);
+            mnuNuovo.Size = new Size(219, 44);
             mnuNuovo.Text = "Nuovo";
             mnuNuovo.Click += mnuNuovo_Click;
             // 
             // mnuApri
             // 
             mnuApri.Name = "mnuApri";
-            mnuApri.Size = new Size(359, 44);
+            mnuApri.Size = new Size(219, 44);
             mnuApri.Text = "Apri";
             mnuApri.Click += mnuApri_Click;
             // 
             // mnuSalva
             // 
             mnuSalva.Name = "mnuSalva";
-            mnuSalva.Size = new Size(359, 44);
+            mnuSalva.Size = new Size(219, 44);
             mnuSalva.Text = "Salva";
             mnuSalva.Click += mnuSalva_Click;
             // 
             // mnuEsci
             // 
             mnuEsci.Name = "mnuEsci";
-            mnuEsci.Size = new Size(359, 44);
+            mnuEsci.Size = new Size(219, 44);
             mnuEsci.Text = "Esci";
             mnuEsci.Click += mnuEsci_Click;
             // 
@@ -126,12 +133,13 @@
             // 
             pctImmagine.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pctImmagine.BackColor = Color.Black;
-            pctImmagine.Location = new Point(364, 42);
+            pctImmagine.Location = new Point(470, 42);
             pctImmagine.Name = "pctImmagine";
-            pctImmagine.Size = new Size(886, 939);
+            pctImmagine.Size = new Size(780, 939);
             pctImmagine.SizeMode = PictureBoxSizeMode.StretchImage;
             pctImmagine.TabIndex = 2;
             pctImmagine.TabStop = false;
+            pctImmagine.MouseDown += pctImmagine_MouseDown;
             pctImmagine.MouseMove += PctImmagine_MouseMove;
             // 
             // dlgApri
@@ -146,9 +154,10 @@
             lstLivelli.IntegralHeight = false;
             lstLivelli.Location = new Point(0, 43);
             lstLivelli.Name = "lstLivelli";
-            lstLivelli.Size = new Size(358, 938);
+            lstLivelli.Size = new Size(464, 938);
             lstLivelli.TabIndex = 3;
             lstLivelli.SelectedIndexChanged += lstLivelli_SelectedIndexChanged;
+            lstLivelli.DoubleClick += lstLivelli_DoubleClick;
             // 
             // Form1
             // 
@@ -187,5 +196,6 @@
         private SaveFileDialog dlgSalva;
         private ToolStripMenuItem mnuSostituisci;
         private ListBox lstLivelli;
+        private ToolStripStatusLabel lblTinta;
     }
 }

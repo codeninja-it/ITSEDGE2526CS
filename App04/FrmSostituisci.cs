@@ -20,6 +20,7 @@ namespace App04
             btnDa.BackColor = setColori.Da;
             btnA.BackColor = setColori.A;
             trkTolleranza.Value = (int)colori.Tolleranza;
+            chkPositivo.Checked = setColori.Tipo == TipologiaSostituzione.Positiva;
         }
 
         private void btnAnnulla_Click(object sender, EventArgs e)
@@ -31,8 +32,9 @@ namespace App04
         private void btnApplica_Click(object sender, EventArgs e)
         {
             setColori.Tolleranza = trkTolleranza.Value;
-            setColori.Da = dlgColore.Color;
-            setColori.A = dlgColore.Color;
+            setColori.Da = btnDa.BackColor;
+            setColori.A = btnA.BackColor;
+            setColori.Tipo = chkPositivo.Checked ? TipologiaSostituzione.Positiva : TipologiaSostituzione.Negativa;
             DialogResult = DialogResult.OK;
             Close();
         }

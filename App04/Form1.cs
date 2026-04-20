@@ -6,10 +6,12 @@ namespace App04
         private Pen matita;
         private List<Point> ultimiPunti = new List<Point>();
         private Impostazioni impostazioni = new Impostazioni();
+        private ColoreDaA colori;
 
         public Form1()
         {
             InitializeComponent();
+            colori = new ColoreDaA(Color.Black, Color.White, 10, TipologiaSostituzione.Positiva);
             pctImmagine.Image = new Bitmap(this.Width, this.Height);
             paint = Graphics.FromImage(pctImmagine.Image);
             paint.Clear(Color.White);
@@ -18,6 +20,7 @@ namespace App04
 
         private void PctImmagine_MouseMove(object sender, MouseEventArgs e)
         {
+            lblCoordinate.Text = $"X: {e.X} Y: {e.Y}";
             if (e.Button == MouseButtons.Left)
             {
                 int altezzaSchermo = pctImmagine.Height;
@@ -129,7 +132,6 @@ namespace App04
 
         private void mnuSostituisci_Click(object sender, EventArgs e)
         {
-            ColoreDaA colori = new ColoreDaA(Color.Black, Color.White, 10, TipologiaSostituzione.Positiva);
             FrmSostituisci sostituisci = new FrmSostituisci(colori);
             DialogResult risultato = sostituisci.ShowDialog();
             if (risultato == DialogResult.OK)
@@ -137,7 +139,7 @@ namespace App04
                 Livello selezionato = (Livello)lstLivelli.SelectedItem;
                 if (selezionato == null)
                     return;
-                Livello nuovo = new Livello("Sostituzione colore", selezionato.Immagine);
+                Livello nuovo = new Livello($"Colore {colori.Da.Name} -> {colori.A.Name}", selezionato.Immagine);
                 lstLivelli.Items.Add(nuovo);
                 lstLivelli.SelectedItem = nuovo;
                 int totali = nuovo.Immagine.Width * nuovo.Immagine.Height;
@@ -170,6 +172,45 @@ namespace App04
             pctImmagine.Image = selezionato.Immagine;
             paint = Graphics.FromImage(pctImmagine.Image);
             pctImmagine.Refresh();
+        }
+
+        private void pctImmagine_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                Bitmap attuale = (Bitmap)pctImmagine.Image;
+                double deltaX = (double)attuale.Width / pctImmagine.Width;
+                double deltaY = (double)attuale.Height / pctImmagine.Height;
+
+                colori.Da = attuale.GetPixel((int)(e.X * deltaX), (int)(e.Y * deltaY));
+                lblTinta.Text = $"Tinta: {colori.Da.GetHue():N2}";
+                lblCoordinate.Text = $"X: {e.X} Y: {e.Y}";
+            }
+        }
+
+        private void lstLivelli_DoubleClick(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Vuoi eliminare il livello selezionato?", "Conferma", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                Livello selezionato = (Livello)lstLivelli.SelectedItem;
+                if (selezionato != null)
+                {
+                    lstLivelli.Items.Remove(selezionato);
+                    if(lstLivelli.Items.Count > 0)
+                    {
+                        lstLivelli.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        Livello nuovo = new Livello(this.Width, this.Height);
+                        lstLivelli.Items.Add(nuovo);
+                        lstLivelli.SelectedItem = nuovo;
+                        pctImmagine.Image = nuovo.Immagine;
+                        paint = Graphics.FromImage(pctImmagine.Image);
+                        pctImmagine.Refresh();
+                    }
+                }
+            }
         }
     }
 }

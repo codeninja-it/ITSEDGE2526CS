@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace App04
 {
@@ -13,13 +14,13 @@ namespace App04
         public Color A { get; set; }
         public float LimSu => Da.GetHue() + Tolleranza;
         public float LimGiù => Da.GetHue() - Tolleranza;
-        public TipologiaSostituzione TipoSostituzione { get; set; }
+        public TipologiaSostituzione Tipo { get; set; }
         public ColoreDaA(Color da, Color a, float tolleranza, TipologiaSostituzione tipoSostituzione)
         {
             Da = da;
             Tolleranza = tolleranza;
             A = a;
-            TipoSostituzione = tipoSostituzione;
+            Tipo = tipoSostituzione;
         }
 
         public bool ControlloCubico(Color daControllare)
@@ -33,10 +34,9 @@ namespace App04
         {
             float tinta = daControllare.GetHue();
             bool risultato = tinta >= LimGiù && tinta <= LimSu;
-            if (TipoSostituzione == TipologiaSostituzione.Positiva)
-                return risultato;
-            else
-                return !risultato;
+
+            return Tipo == TipologiaSostituzione.Positiva ? risultato : !risultato;
         }
+
     }
 }

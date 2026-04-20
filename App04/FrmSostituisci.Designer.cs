@@ -37,6 +37,7 @@
             dlgColore = new ColorDialog();
             trkTolleranza = new TrackBar();
             label3 = new Label();
+            chkPositivo = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)trkTolleranza).BeginInit();
             SuspendLayout();
             // 
@@ -81,7 +82,7 @@
             // btnAnnulla
             // 
             btnAnnulla.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnAnnulla.Location = new Point(701, 246);
+            btnAnnulla.Location = new Point(701, 443);
             btnAnnulla.Name = "btnAnnulla";
             btnAnnulla.Size = new Size(144, 46);
             btnAnnulla.TabIndex = 4;
@@ -92,7 +93,7 @@
             // btnApplica
             // 
             btnApplica.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnApplica.Location = new Point(551, 246);
+            btnApplica.Location = new Point(551, 443);
             btnApplica.Name = "btnApplica";
             btnApplica.Size = new Size(144, 46);
             btnApplica.TabIndex = 5;
@@ -119,11 +120,22 @@
             label3.TabIndex = 7;
             label3.Text = "Tolleranza";
             // 
+            // chkPositivo
+            // 
+            chkPositivo.AutoSize = true;
+            chkPositivo.Location = new Point(138, 212);
+            chkPositivo.Name = "chkPositivo";
+            chkPositivo.Size = new Size(236, 36);
+            chkPositivo.TabIndex = 8;
+            chkPositivo.Text = "Controllo positivo";
+            chkPositivo.UseVisualStyleBackColor = true;
+            // 
             // FrmSostituisci
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(857, 304);
+            ClientSize = new Size(857, 501);
+            Controls.Add(chkPositivo);
             Controls.Add(label3);
             Controls.Add(trkTolleranza);
             Controls.Add(btnApplica);
@@ -150,5 +162,6 @@
         private ColorDialog dlgColore;
         private TrackBar trkTolleranza;
         private Label label3;
+        private CheckBox chkPositivo;
     }
 }
