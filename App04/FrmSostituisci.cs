@@ -19,15 +19,20 @@ namespace App04
             setColori = colori;
             btnDa.BackColor = setColori.Da;
             btnA.BackColor = setColori.A;
+            trkTolleranza.Value = (int)colori.Tolleranza;
         }
 
         private void btnAnnulla_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
             Close();
         }
 
         private void btnApplica_Click(object sender, EventArgs e)
         {
+            setColori.Tolleranza = trkTolleranza.Value;
+            setColori.Da = dlgColore.Color;
+            setColori.A = dlgColore.Color;
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -39,7 +44,6 @@ namespace App04
             if (risultato == DialogResult.OK)
             {
                 btnDa.BackColor = dlgColore.Color;
-                setColori.Da = dlgColore.Color;
             }
         }
 
@@ -50,7 +54,6 @@ namespace App04
             if (risultato == DialogResult.OK)
             {
                 btnA.BackColor = dlgColore.Color;
-                setColori.A = dlgColore.Color;
             }
         }
     }

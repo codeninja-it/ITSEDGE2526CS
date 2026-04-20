@@ -120,23 +120,28 @@ namespace App04
 
         private void mnuSostituisci_Click(object sender, EventArgs e)
         {
-            ColoreDaA colori = new ColoreDaA(Color.Black, Color.White);
+            ColoreDaA colori = new ColoreDaA(Color.Black, Color.White, 10);
             FrmSostituisci sostituisci = new FrmSostituisci(colori);
             DialogResult risultato = sostituisci.ShowDialog();
             if(risultato == DialogResult.OK)
             {
                 Bitmap immagine = new Bitmap(pctImmagine.Image);
-                for(int x=0; x < immagine.Width; x++)
+                int totali = immagine.Width * immagine.Height;
+                int intercettati = 0;
+                for (int x=0; x < immagine.Width; x++)
                 {
                     for (int y=0; y < immagine.Height; y++)
                     {
                         Color singolo = immagine.GetPixel(x, y);
-                        if(singolo.R == colori.Da.R && singolo.G == colori.Da.G && singolo.B == colori.Da.B)
+                        if(colori.ControlloCilindrico(singolo))
                         {
+                            intercettati++;
                             immagine.SetPixel(x, y, colori.A);
                         }
                     }
                 }
+                float percentuale = (float)intercettati / (float)totali * 100.0f;
+                MessageBox.Show($"il {percentuale:N2}% della superificie era positivo.");
                 pctImmagine.Image = immagine;
                 paint = Graphics.FromImage(pctImmagine.Image);
                 pctImmagine.Refresh();

@@ -35,6 +35,9 @@
             btnAnnulla = new Button();
             btnApplica = new Button();
             dlgColore = new ColorDialog();
+            trkTolleranza = new TrackBar();
+            label3 = new Label();
+            ((System.ComponentModel.ISupportInitialize)trkTolleranza).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -49,7 +52,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 84);
+            label2.Location = new Point(12, 167);
             label2.Name = "label2";
             label2.Size = new Size(120, 32);
             label2.TabIndex = 1;
@@ -60,7 +63,7 @@
             btnDa.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             btnDa.Location = new Point(138, 12);
             btnDa.Name = "btnDa";
-            btnDa.Size = new Size(342, 46);
+            btnDa.Size = new Size(707, 46);
             btnDa.TabIndex = 2;
             btnDa.UseVisualStyleBackColor = true;
             btnDa.Click += btnDa_Click;
@@ -68,9 +71,9 @@
             // btnA
             // 
             btnA.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            btnA.Location = new Point(138, 77);
+            btnA.Location = new Point(138, 160);
             btnA.Name = "btnA";
-            btnA.Size = new Size(342, 46);
+            btnA.Size = new Size(707, 46);
             btnA.TabIndex = 3;
             btnA.UseVisualStyleBackColor = true;
             btnA.Click += btnA_Click;
@@ -78,7 +81,7 @@
             // btnAnnulla
             // 
             btnAnnulla.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnAnnulla.Location = new Point(336, 227);
+            btnAnnulla.Location = new Point(701, 246);
             btnAnnulla.Name = "btnAnnulla";
             btnAnnulla.Size = new Size(144, 46);
             btnAnnulla.TabIndex = 4;
@@ -89,7 +92,7 @@
             // btnApplica
             // 
             btnApplica.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnApplica.Location = new Point(186, 227);
+            btnApplica.Location = new Point(551, 246);
             btnApplica.Name = "btnApplica";
             btnApplica.Size = new Size(144, 46);
             btnApplica.TabIndex = 5;
@@ -97,11 +100,32 @@
             btnApplica.UseVisualStyleBackColor = true;
             btnApplica.Click += btnApplica_Click;
             // 
+            // trkTolleranza
+            // 
+            trkTolleranza.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            trkTolleranza.Location = new Point(138, 64);
+            trkTolleranza.Maximum = 360;
+            trkTolleranza.Name = "trkTolleranza";
+            trkTolleranza.Size = new Size(707, 90);
+            trkTolleranza.TabIndex = 6;
+            trkTolleranza.Value = 10;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(12, 64);
+            label3.Name = "label3";
+            label3.Size = new Size(121, 32);
+            label3.TabIndex = 7;
+            label3.Text = "Tolleranza";
+            // 
             // FrmSostituisci
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(492, 285);
+            ClientSize = new Size(857, 304);
+            Controls.Add(label3);
+            Controls.Add(trkTolleranza);
             Controls.Add(btnApplica);
             Controls.Add(btnAnnulla);
             Controls.Add(btnA);
@@ -110,6 +134,7 @@
             Controls.Add(label1);
             Name = "FrmSostituisci";
             Text = "FrmSostituisci";
+            ((System.ComponentModel.ISupportInitialize)trkTolleranza).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -123,5 +148,7 @@
         private Button btnAnnulla;
         private Button btnApplica;
         private ColorDialog dlgColore;
+        private TrackBar trkTolleranza;
+        private Label label3;
     }
 }
