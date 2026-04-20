@@ -13,11 +13,13 @@ namespace App04
         public Color A { get; set; }
         public float LimSu => Da.GetHue() + Tolleranza;
         public float LimGiù => Da.GetHue() - Tolleranza;
-        public ColoreDaA(Color da, Color a, float tolleranza)
+        public TipologiaSostituzione TipoSostituzione { get; set; }
+        public ColoreDaA(Color da, Color a, float tolleranza, TipologiaSostituzione tipoSostituzione)
         {
             Da = da;
             Tolleranza = tolleranza;
             A = a;
+            TipoSostituzione = tipoSostituzione;
         }
 
         public bool ControlloCubico(Color daControllare)
@@ -30,7 +32,11 @@ namespace App04
         public bool ControlloCilindrico(Color daControllare)
         {
             float tinta = daControllare.GetHue();
-            return tinta >= LimGiù && tinta <= LimSu;
+            bool risultato = tinta >= LimGiù && tinta <= LimSu;
+            if (TipoSostituzione == TipologiaSostituzione.Positiva)
+                return risultato;
+            else
+                return !risultato;
         }
     }
 }

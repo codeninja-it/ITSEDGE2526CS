@@ -76,7 +76,10 @@ namespace App04
 
         private void mnuNuovo_Click(object sender, EventArgs e)
         {
-            pctImmagine.Image = new Bitmap(this.Width, this.Height);
+            Livello nuovo = new Livello(this.Width, this.Height);
+            lstLivelli.Items.Add(nuovo);
+            lstLivelli.SelectedItem = nuovo;
+            pctImmagine.Image = nuovo.Immagine;
             paint = Graphics.FromImage(pctImmagine.Image);
             paint.Clear(Color.White);
             pctImmagine.Invalidate();
@@ -90,20 +93,26 @@ namespace App04
             if (risultato == DialogResult.OK)
             {
                 string immagineDaAprire = dlgApri.FileName;
-                pctImmagine.Image = new Bitmap(immagineDaAprire);
+                Livello nuovo = new Livello(immagineDaAprire);
+                lstLivelli.Items.Add(nuovo);
+                lstLivelli.SelectedItem = nuovo;
+                pctImmagine.Image = nuovo.Immagine;
                 paint = Graphics.FromImage(pctImmagine.Image);
             }
         }
 
         private void mnuSalva_Click(object sender, EventArgs e)
         {
+            if (lstLivelli.SelectedItem == null)
+                return;
             dlgSalva.Title = "Seleziona l'immagine da aprire";
             dlgSalva.Filter = "File JPG|*.jpg|File PNG|*.png|Tutti i files|*.*";
             DialogResult risultato = dlgSalva.ShowDialog();
             if (risultato == DialogResult.OK)
             {
                 string percorso = dlgSalva.FileName;
-                pctImmagine.Image.Save(percorso);
+                Livello selezionato = (Livello)lstLivelli.SelectedItem;
+                selezionato.Salva(percorso);
             }
         }
 
@@ -120,32 +129,47 @@ namespace App04
 
         private void mnuSostituisci_Click(object sender, EventArgs e)
         {
-            ColoreDaA colori = new ColoreDaA(Color.Black, Color.White, 10);
+            ColoreDaA colori = new ColoreDaA(Color.Black, Color.White, 10, TipologiaSostituzione.Positiva);
             FrmSostituisci sostituisci = new FrmSostituisci(colori);
             DialogResult risultato = sostituisci.ShowDialog();
-            if(risultato == DialogResult.OK)
+            if (risultato == DialogResult.OK)
             {
-                Bitmap immagine = new Bitmap(pctImmagine.Image);
-                int totali = immagine.Width * immagine.Height;
+                Livello selezionato = (Livello)lstLivelli.SelectedItem;
+                if (selezionato == null)
+                    return;
+                Livello nuovo = new Livello("Sostituzione colore", selezionato.Immagine);
+                lstLivelli.Items.Add(nuovo);
+                lstLivelli.SelectedItem = nuovo;
+                int totali = nuovo.Immagine.Width * nuovo.Immagine.Height;
                 int intercettati = 0;
-                for (int x=0; x < immagine.Width; x++)
+                for (int x = 0; x < nuovo.Immagine.Width; x++)
                 {
-                    for (int y=0; y < immagine.Height; y++)
+                    for (int y = 0; y < nuovo.Immagine.Height; y++)
                     {
-                        Color singolo = immagine.GetPixel(x, y);
-                        if(colori.ControlloCilindrico(singolo))
+                        Color singolo = nuovo.Immagine.GetPixel(x, y);
+                        if (colori.ControlloCilindrico(singolo))
                         {
                             intercettati++;
-                            immagine.SetPixel(x, y, colori.A);
+                            nuovo.Immagine.SetPixel(x, y, colori.A);
                         }
                     }
                 }
                 float percentuale = (float)intercettati / (float)totali * 100.0f;
                 MessageBox.Show($"il {percentuale:N2}% della superificie era positivo.");
-                pctImmagine.Image = immagine;
+                pctImmagine.Image = nuovo.Immagine;
                 paint = Graphics.FromImage(pctImmagine.Image);
                 pctImmagine.Refresh();
             }
+        }
+
+        private void lstLivelli_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstLivelli.SelectedItem == null)
+                return;
+            Livello selezionato = (Livello)lstLivelli.SelectedItem;
+            pctImmagine.Image = selezionato.Immagine;
+            paint = Graphics.FromImage(pctImmagine.Image);
+            pctImmagine.Refresh();
         }
     }
 }
