@@ -37,6 +37,7 @@
             mnuSalva = new ToolStripMenuItem();
             mnuEsci = new ToolStripMenuItem();
             modificaToolStripMenuItem = new ToolStripMenuItem();
+            mnuSostituisci = new ToolStripMenuItem();
             pctImmagine = new PictureBox();
             dlgApri = new OpenFileDialog();
             dlgSalva = new SaveFileDialog();
@@ -64,7 +65,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(32, 32);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, modificaToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, modificaToolStripMenuItem, mnuSostituisci });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1372, 42);
@@ -112,6 +113,13 @@
             modificaToolStripMenuItem.Size = new Size(127, 38);
             modificaToolStripMenuItem.Text = "Modifica";
             modificaToolStripMenuItem.Click += modificaToolStripMenuItem_Click;
+            // 
+            // mnuSostituisci
+            // 
+            mnuSostituisci.Name = "mnuSostituisci";
+            mnuSostituisci.Size = new Size(140, 38);
+            mnuSostituisci.Text = "Sostituisci";
+            mnuSostituisci.Click += mnuSostituisci_Click;
             // 
             // pctImmagine
             // 
@@ -164,5 +172,6 @@
         private PictureBox pctImmagine;
         private OpenFileDialog dlgApri;
         private SaveFileDialog dlgSalva;
+        private ToolStripMenuItem mnuSostituisci;
     }
 }

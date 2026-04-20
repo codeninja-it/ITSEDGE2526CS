@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace App04
+{
+    public partial class FrmSostituisci : Form
+    {
+        private readonly ColoreDaA setColori;
+        public FrmSostituisci(ColoreDaA colori)
+        {
+            InitializeComponent();
+            setColori = colori;
+            btnDa.BackColor = setColori.Da;
+            btnA.BackColor = setColori.A;
+        }
+
+        private void btnAnnulla_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnApplica_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        private void btnDa_Click(object sender, EventArgs e)
+        {
+            dlgColore.Color = btnDa.BackColor;
+            DialogResult risultato = dlgColore.ShowDialog();
+            if (risultato == DialogResult.OK)
+            {
+                btnDa.BackColor = dlgColore.Color;
+                setColori.Da = dlgColore.Color;
+            }
+        }
+
+        private void btnA_Click(object sender, EventArgs e)
+        {
+            dlgColore.Color = btnA.BackColor;
+            DialogResult risultato = dlgColore.ShowDialog();
+            if (risultato == DialogResult.OK)
+            {
+                btnA.BackColor = dlgColore.Color;
+                setColori.A = dlgColore.Color;
+            }
+        }
+    }
+}

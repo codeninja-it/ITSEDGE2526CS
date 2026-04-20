@@ -111,10 +111,36 @@ namespace App04
         {
             FormImpostazioni nuovo = new FormImpostazioni(impostazioni);
             DialogResult risultato = nuovo.ShowDialog();
-            if(risultato == DialogResult.OK)
+            if (risultato == DialogResult.OK)
             {
                 // aggiornare la mia matita
                 matita = new Pen(impostazioni.Colore, impostazioni.Tratto);
+            }
+        }
+
+        private void mnuSostituisci_Click(object sender, EventArgs e)
+        {
+            ColoreDaA colori = new ColoreDaA(Color.Black, Color.White);
+            FrmSostituisci sostituisci = new FrmSostituisci(colori);
+            DialogResult risultato = sostituisci.ShowDialog();
+            if(risultato == DialogResult.OK)
+            {
+                Bitmap immagine = new Bitmap(pctImmagine.Image);
+                for(int x=0; x < immagine.Width; x++)
+                {
+                    for (int y=0; y < immagine.Height; y++)
+                    {
+                        Color singolo = immagine.GetPixel(x, y);
+                        singolo.
+                        if(singolo.R == colori.Da.R && singolo.G == colori.Da.G && singolo.B == colori.Da.B)
+                        {
+                            immagine.SetPixel(x, y, colori.A);
+                        }
+                    }
+                }
+                pctImmagine.Image = immagine;
+                paint = Graphics.FromImage(pctImmagine.Image);
+                pctImmagine.Refresh();
             }
         }
     }
