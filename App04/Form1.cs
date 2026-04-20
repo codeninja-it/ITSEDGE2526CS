@@ -131,7 +131,6 @@ namespace App04
                     for (int y=0; y < immagine.Height; y++)
                     {
                         Color singolo = immagine.GetPixel(x, y);
-                        singolo.
                         if(singolo.R == colori.Da.R && singolo.G == colori.Da.G && singolo.B == colori.Da.B)
                         {
                             immagine.SetPixel(x, y, colori.A);
