@@ -43,6 +43,7 @@
             dlgApri = new OpenFileDialog();
             dlgSalva = new SaveFileDialog();
             lstLivelli = new ListBox();
+            mnuBordi = new ToolStripMenuItem();
             statusStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pctImmagine).BeginInit();
@@ -73,10 +74,10 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(32, 32);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, modificaToolStripMenuItem, mnuSostituisci });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, modificaToolStripMenuItem, mnuSostituisci, mnuBordi });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1250, 40);
+            menuStrip1.Size = new Size(1250, 42);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -84,7 +85,7 @@
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mnuNuovo, mnuApri, mnuSalva, mnuEsci });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(71, 36);
+            fileToolStripMenuItem.Size = new Size(71, 38);
             fileToolStripMenuItem.Text = "File";
             // 
             // mnuNuovo
@@ -118,14 +119,14 @@
             // modificaToolStripMenuItem
             // 
             modificaToolStripMenuItem.Name = "modificaToolStripMenuItem";
-            modificaToolStripMenuItem.Size = new Size(127, 36);
+            modificaToolStripMenuItem.Size = new Size(127, 38);
             modificaToolStripMenuItem.Text = "Modifica";
             modificaToolStripMenuItem.Click += modificaToolStripMenuItem_Click;
             // 
             // mnuSostituisci
             // 
             mnuSostituisci.Name = "mnuSostituisci";
-            mnuSostituisci.Size = new Size(140, 36);
+            mnuSostituisci.Size = new Size(140, 38);
             mnuSostituisci.Text = "Sostituisci";
             mnuSostituisci.Click += mnuSostituisci_Click;
             // 
@@ -139,6 +140,7 @@
             pctImmagine.SizeMode = PictureBoxSizeMode.StretchImage;
             pctImmagine.TabIndex = 2;
             pctImmagine.TabStop = false;
+            pctImmagine.Click += pctImmagine_Click;
             pctImmagine.MouseDown += pctImmagine_MouseDown;
             pctImmagine.MouseMove += PctImmagine_MouseMove;
             // 
@@ -158,6 +160,13 @@
             lstLivelli.TabIndex = 3;
             lstLivelli.SelectedIndexChanged += lstLivelli_SelectedIndexChanged;
             lstLivelli.DoubleClick += lstLivelli_DoubleClick;
+            // 
+            // mnuBordi
+            // 
+            mnuBordi.Name = "mnuBordi";
+            mnuBordi.Size = new Size(90, 38);
+            mnuBordi.Text = "Bordi";
+            mnuBordi.Click += mnuBordi_Click;
             // 
             // Form1
             // 
@@ -197,5 +206,6 @@
         private ToolStripMenuItem mnuSostituisci;
         private ListBox lstLivelli;
         private ToolStripStatusLabel lblTinta;
+        private ToolStripMenuItem mnuBordi;
     }
 }

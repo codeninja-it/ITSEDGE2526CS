@@ -7,6 +7,7 @@ namespace App04
         private List<Point> ultimiPunti = new List<Point>();
         private Impostazioni impostazioni = new Impostazioni();
         private ColoreDaA colori;
+        private List<Livello> livelli = new List<Livello>();
 
         public Form1()
         {
@@ -196,7 +197,7 @@ namespace App04
                 if (selezionato != null)
                 {
                     lstLivelli.Items.Remove(selezionato);
-                    if(lstLivelli.Items.Count > 0)
+                    if (lstLivelli.Items.Count > 0)
                     {
                         lstLivelli.SelectedIndex = 0;
                     }
@@ -211,6 +212,36 @@ namespace App04
                     }
                 }
             }
+        }
+
+        private void pctImmagine_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mnuBordi_Click(object sender, EventArgs e)
+        {
+            ColoreDaA selezione = new ColoreDaA(colori.Da, colori.A, colori.Tolleranza, colori.Tipo);
+            FrmSostituisci sostituisci = new FrmSostituisci(selezione);
+            DialogResult risultato = sostituisci.ShowDialog();
+            
+            Bitmap immagine = (Bitmap)pctImmagine.Image;
+            
+            for (int y=0; y < immagine.Height; y++)
+            {
+                for(int x=0; x < immagine.Width - 1; x++)
+                {
+                    Color attuale = immagine.GetPixel(x, y);
+                    Color successivo = immagine.GetPixel(x + 1, y);
+                    float differenza = Math.Abs( successivo.GetHue() - attuale.GetHue() );
+                    if(selezione.Tolleranza < differenza && selezione.ControlloCilindrico(attuale))
+                    {
+                        immagine.SetPixel(x, y, selezione.A);
+                    }
+                }
+            }
+            pctImmagine.Refresh();
+
         }
     }
 }
