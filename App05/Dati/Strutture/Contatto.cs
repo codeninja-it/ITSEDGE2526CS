@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace App05.Dati.Strutture
 {
     [Table("Contatti")]
-    public class Contatto
+    public class Contatto : Sicurezza
     {
         [Key] public int Id { get; set; }
         [Required] public string Nome { get; set; } = string.Empty;

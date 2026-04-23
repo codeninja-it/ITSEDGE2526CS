@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace App05.Dati.Strutture
 {
     [Table("Gruppi")]
-    public class Gruppo
+    public class Gruppo : Sicurezza
     {
         [Key] public int Id { get; set; }
         [Required] public string Nome { get; set; } = string.Empty;
