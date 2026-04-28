@@ -70,7 +70,13 @@ namespace App05
                         {
                             chiamata.Response.StatusCode = 404;
                             chiamata.Response.Close();
-                        }                        
+                        }
+
+                        //Contatto? selezionato = db.Contatti.FirstOrDefault(c => c.Id == 1);
+                        //db.Contatti.Remove(selezionato);
+                        //db.Contatti.Update(selezionato);
+                        
+
                         break;
 
                     case "out": // quando l'utente mi chiede di restituire tutti i dati collezionati
