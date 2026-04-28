@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <None Update="Contatti.sqlite">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="wwwroot\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

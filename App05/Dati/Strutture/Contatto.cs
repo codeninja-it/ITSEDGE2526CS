@@ -17,6 +17,6 @@ namespace App05.Dati.Strutture
         public string Telefono { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public List<Gruppo> Gruppi { get; set; } = new List<Gruppo>();
-        [Required] public Tipo Tipo { get; set; }
+        public Tipo? Tipo { get; set; }
     }
 }
