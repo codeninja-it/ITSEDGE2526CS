@@ -14,17 +14,17 @@
             Console.WriteLine(riconoscitore);
             // in insegnamento
             // ora piove, le previsioni dicono pioggia e vado all'aperto
-            riconoscitore.Impara(new double[] { 1.0, 1.0, 1.0 }, 1.0);
+            riconoscitore.Impara(new double[] { 2, 2, 4 }, 1.0, 1000);
             Console.WriteLine(riconoscitore);
             // gli insegno quando non piove
-            riconoscitore.Impara(new double[] { 0.0, 0.0, 0.0 }, 0.0);
+            riconoscitore.Impara(new double[] { 2, 2, 3 }, 0.0, 1000);
             Console.WriteLine(riconoscitore);
             // gli insegno non piove, non pioverà e devo andare all'aperto
-            riconoscitore.Impara(new double[] { 0.0, 0.0, 1.0 }, 0.0);
+            riconoscitore.Impara(new double[] { 3, 3, 9 }, 1.0, 1000);
             Console.WriteLine(riconoscitore);
 
             // gli dico che se pioverà lo porto
-            riconoscitore.Impara(new double[] { 0.0, 1.0, 1.0 }, 1.0);
+            riconoscitore.Impara(new double[] { 4, 4, 16 }, 1.0, 1000);
             Console.WriteLine(riconoscitore);
             double scelta = riconoscitore.Decidi(riconoscitore.Predici(new double[] { 0.0, 0.0, 0.0 }));
             Console.WriteLine(scelta);

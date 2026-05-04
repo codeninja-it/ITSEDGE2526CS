@@ -48,9 +48,16 @@ namespace App06
         public double Decidi(double valore)
         {
             if (valore >= 0)
-                return 1;
+                return 1.0;
             else
-                return 0;
+                return 0.0;
+        }
+
+        public void Impara(double[] domanda, double risultato, int volte, double fiducia = 0.1) {
+            for(int i = 0; i < volte; i++)
+            {
+                Impara(domanda, risultato, fiducia);
+            }
         }
 
         public void Impara(double[] domanda, double risultato, double fiducia = 0.1)
@@ -71,8 +78,10 @@ namespace App06
             // altrimenti approfondisco il mio ricordo
             for (int i = 0; i < ricordo.Length; i++)
             {
-                // pesando ogni informazione sulla base di quanta fiducia gli concedo
-                ricordo[i] += domanda[i] * confidenza;
+                // calcolo quanto mi insegna questa informazione
+                double insegnamento = domanda[i] * confidenza;
+                // e lo aggiungo al mio ricordo
+                ricordo[i] += insegnamento;
             }
             // spostando il mio pregiudizio sull'attuale confidenza
             pregiudizio += confidenza;
