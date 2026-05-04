@@ -51,6 +51,51 @@ namespace App05
                         }
                         break;
 
+                    case "del": // se l'utente mi chiama "/del/1"
+                        int identificativo = int.Parse(parametri[0]);
+                        Contatto? daCancellare = db.Contatti.FirstOrDefault(c => c.Id == identificativo);
+                        string messaggio = "";
+                        if(daCancellare != null)
+                        {
+                            db.Contatti.Remove(daCancellare);
+                            db.SaveChanges();
+                            chiamata.Response.StatusCode = 200;
+                            messaggio = $"Il contatto {daCancellare.Nome} {daCancellare.Cognome} è stato cancellato!";
+                        } else
+                        {
+                            chiamata.Response.StatusCode = 404;
+                            messaggio = "Non ho idea di chi tu stia cercando...";
+                        }
+                        chiamata.Response.Headers.Add("Content-Type", "text/html");
+                        chiamata.Response.OutputStream.Write(Encoding.UTF8.GetBytes(messaggio));
+                        chiamata.Response.Close();
+                        break;
+
+                    case "upd": // se l'utente mi chiama "/upd/1/mario/rossi/0551234567"
+                        int idDaModificare = int.Parse(parametri[0]);
+                        Contatto? daModificare = db.Contatti.FirstOrDefault(c => c.Id == idDaModificare);
+                        if(daModificare != null)
+                        {
+                            daModificare.Nome = parametri[1];
+                            daModificare.Cognome = parametri[2];
+                            daModificare.Telefono = parametri[3];
+                            db.Update(daModificare);
+                            db.SaveChanges();
+                            chiamata.Response.StatusCode = 200;
+                            chiamata.Response.OutputStream.Write(
+                                Encoding.UTF8.GetBytes($"Il contatto {daModificare.Nome} {daModificare.Cognome} è stato modificato!")
+                            );
+
+                        } else
+                        {
+                            chiamata.Response.StatusCode = 404;
+                            chiamata.Response.OutputStream.Write(
+                                Encoding.UTF8.GetBytes($"Non ho idea di chi tu stia cercando...")
+                            );
+                        }
+                        chiamata.Response.Close();
+                        break;
+
                     case "in": // se l'utente mi chiama "/in/[0:nome]/[1:cognome]/[2:telefono]"
                         if(parametri.Count == 3)
                         {
