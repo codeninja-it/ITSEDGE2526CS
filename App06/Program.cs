@@ -52,8 +52,6 @@
             TabellinaDel5.Add(new Lezione() { informazioni = new double[] { 100, 5 }, risultato = 500 });
             Riconoscitore studente = new Riconoscitore(2);
 
-            double
-
             foreach(Lezione singola in TabellinaDel5)
             {
                 studente.Impara(singola.informazioni, singola.risultato, 0.1);
