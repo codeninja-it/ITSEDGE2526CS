@@ -33,16 +33,15 @@ namespace App06
         public double Predici(double[] domanda)
         {
             // basandosi sul pregiudizio
-            double indizi = pregiudizio;
-            int limite = Math.Min(domanda.Length, ricordo.Length);
+            double idea = pregiudizio;
             // per ogni proprietà che conosce
-            for (int i = 0; i < limite; i++)
+            for (int i = 0; i < ricordo.Length; i++)
             {
                 // e pesandola sui suoi ricordi
-                indizi += domanda[i] * ricordo[i];
+                idea += domanda[i] * ricordo[i];
             }
             // produrrà una predizione
-            return indizi;
+            return idea;
         }
 
         // la sua decisione basata sulla predizione
@@ -71,8 +70,7 @@ namespace App06
                 return;
             } 
             // altrimenti approfondisco il mio ricordo
-            int limite = Math.Min(informazione.Length, ricordo.Length);
-            for (int i = 0; i < limite; i++)
+            for (int i = 0; i < ricordo.Length; i++)
             {
                 // calcolo quanto mi insegna questa informazione
                 double insegnamento = informazione[i] * confidenza;
