@@ -8,8 +8,9 @@ namespace App06
 {
     public class Riconoscitore
     {
-
+        // l'array dei ricordi
         public double[] ricordo;
+        // l'ancora che mi tiene legato alla mia idea
         public double pregiudizio;
 
         public Riconoscitore(int proprietà) {
@@ -40,7 +41,7 @@ namespace App06
                 indizi += domanda[i] * ricordo[i];
             }
             // produrrà una predizione
-            return Decidi(indizi);
+            return indizi;
         }
 
         // la sua decisione basata sulla predizione
@@ -53,18 +54,11 @@ namespace App06
                 return 0.0;
         }
 
-        public void Impara(double[] domanda, double risultato, int volte, double fiducia = 0.1) {
-            for(int i = 0; i < volte; i++)
-            {
-                Impara(domanda, risultato, fiducia);
-            }
-        }
-
-        public void Impara(double[] domanda, double risultato, double fiducia = 0.1)
+        public void Impara(double[] informazione, double risultato, double fiducia = 0.001)
         {
             // quando imparo
             // parto da quello che sò
-            double predizione = Predici(domanda);
+            double predizione = Predici(informazione);
             // controllo se è differente da quello che mi viene detto
             double errore = risultato - predizione;
             // decido quanto ne sono confidente
@@ -79,7 +73,7 @@ namespace App06
             for (int i = 0; i < ricordo.Length; i++)
             {
                 // calcolo quanto mi insegna questa informazione
-                double insegnamento = domanda[i] * confidenza;
+                double insegnamento = informazione[i] * confidenza;
                 // e lo aggiungo al mio ricordo
                 ricordo[i] += insegnamento;
             }
