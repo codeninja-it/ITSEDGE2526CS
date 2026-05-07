@@ -34,8 +34,9 @@ namespace App06
         {
             // basandosi sul pregiudizio
             double indizi = pregiudizio;
+            int limite = Math.Min(domanda.Length, ricordo.Length);
             // per ogni proprietà che conosce
-            for (int i = 0; i < ricordo.Length; i++)
+            for (int i = 0; i < limite; i++)
             {
                 // e pesandola sui suoi ricordi
                 indizi += domanda[i] * ricordo[i];
@@ -70,7 +71,8 @@ namespace App06
                 return;
             } 
             // altrimenti approfondisco il mio ricordo
-            for (int i = 0; i < ricordo.Length; i++)
+            int limite = Math.Min(informazione.Length, ricordo.Length);
+            for (int i = 0; i < limite; i++)
             {
                 // calcolo quanto mi insegna questa informazione
                 double insegnamento = informazione[i] * confidenza;

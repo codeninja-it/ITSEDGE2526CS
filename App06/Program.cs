@@ -43,31 +43,32 @@
 
             // nuovo corso, nuovo studente!
             List<Lezione> TabellinaDel5 = new List<Lezione>();
-            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { 1, 5 }, risultato = 5 });
-            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { 2, 5 }, risultato = 10 });
-            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { 3, 5 }, risultato = 15 });
-            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { 4, 5 }, risultato = 20 });
-            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { 5, 5 }, risultato = 25 });
-            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { 50, 5 }, risultato = 250 });
-            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { 100, 5 }, risultato = 500 });
-            Riconoscitore studente = new Riconoscitore(2);
+            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { .1 }, risultato = .5 });
+            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { .2 }, risultato = 1.0 });
+            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { .3 }, risultato = 1.5 });
+            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { .4 }, risultato = 2.0 });
+            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { .5 }, risultato = 2.5 });
+            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { .6 }, risultato = 3.0 });
+            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { .7 }, risultato = 3.5 });
+            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { .8 }, risultato = 4.0 });
+            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { .9 }, risultato = 4.5 });
+            TabellinaDel5.Add(new Lezione() { informazioni = new double[] { 1.0 }, risultato = 5.0 });
+            Riconoscitore studente = new Riconoscitore(1);
 
             foreach(Lezione singola in TabellinaDel5)
             {
-                studente.Impara(singola.informazioni, singola.risultato, 0.1);
-                Console.WriteLine(studente);
-                Console.WriteLine("Quanto fa 5x10 ? " + studente.Predici(new double[] { 10, 5 }));
+                CicloInsegnamento(studente, singola, new double[] { .8 });
             }
         }
 
         static void CicloInsegnamento(Riconoscitore riconoscitore, Lezione lezione, double[] controllo)
         {
-            for (int i = 0; i < 30000; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 riconoscitore.Impara(
                     lezione.informazioni, 
                     lezione.risultato, 
-                    0.001
+                    0.0001
                 );
                 if (i % 1000 == 0)
                 {
