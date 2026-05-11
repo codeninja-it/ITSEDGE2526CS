@@ -13,9 +13,9 @@ while True:
         print(db[chiave])
     elif comando == "A": # all
         print(db)
-    elif comando == "L": # carica
+    elif comando == "L": # carica da file
         pass
-    elif comando == "S": # salva
+    elif comando == "S": # salva su file
         pass
     elif comando == "Q": # exit
         print("Addio!")
