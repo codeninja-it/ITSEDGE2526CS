@@ -1,21 +1,21 @@
 # come creo la tabella
 def Init(telefono, cornetta):
-    cornetta.execute("DROP TABLE IF EXISTS tipi")
+    cornetta.execute("DROP TABLE IF EXISTS clienti")
     cornetta.execute("""
-        CREATE TABLE IF NOT EXISTS tipi (
-            idtipo INTEGER PRIMARY KEY AUTOINCREMENT,
-            tipo TEXT,
-            descrizione TEXT
+        CREATE TABLE IF NOT EXISTS clienti (
+            idcliente INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT,
+            cognome TEXT
         )
     """)
 
 # come inserisco i dati in tabella
 def Inserisci(telefono, cornetta):
     cornetta.execute(
-        "INSERT INTO tipi (tipo, descrizione) VALUES (?, ?)", 
+        "INSERT INTO clienti (nome, cognome) VALUES (?, ?)", 
         (
             input("Nome:\t"), 
-            input("Descrizione:\t")
+            input("Cognome:\t")
         )
     )
     telefono.commit()
@@ -24,7 +24,7 @@ def Inserisci(telefono, cornetta):
 def Vedi(telefono, cornetta):
     dati = cornetta.execute("""
         SELECT *
-        FROM tipi
+        FROM clienti
     """)
     for riga in dati:
         print(riga)
@@ -32,9 +32,10 @@ def Vedi(telefono, cornetta):
 # come aggiorno i dati in tabella
 def Aggiorna(telefono, cornetta):
     cornetta.execute(
-        "UPDATE tipi SET descrizione=? WHERE idtipo=?",
+        "UPDATE clienti SET nome=?, cognome=? WHERE idcliente=?",
         (
-            input("Descrizione:\t"), 
+            input("Nome:\t"), 
+            input("Cognome:\t"), 
             int(input("Id da modificare:\t"))
         )
     )
@@ -43,7 +44,7 @@ def Aggiorna(telefono, cornetta):
 # come cancello i dati in tabella
 def Cancella(telefono, cornetta):
     cornetta.execute(
-        "DELETE FROM tipi WHERE idtipo=?", 
+        "DELETE FROM clienti WHERE idcliente=?", 
         (
             int(input("Id da cancellare:\t")),
         )
@@ -52,11 +53,11 @@ def Cancella(telefono, cornetta):
 
 def Main(telefono, cornetta):
     print("-" * 20)
-    print("Gestione TIPI")
+    print("Gestione CLIENTI")
     print("-" * 20)
     inEsecuzione = True
     while(inEsecuzione):
-        comando = input("tipi>")
+        comando = input("clienti>")
         if comando == "add": # Create
             Inserisci(telefono, cornetta)
         elif comando == "see": # Read
