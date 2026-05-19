@@ -1,6 +1,8 @@
 import sqlite3
 import tipi
 import clienti
+import camere
+import prenotazioni
 
 # Gestione dell'entità tipi
 telefono = sqlite3.connect("roomtrack.db")
@@ -24,6 +26,10 @@ def Main():
             tipi.Main(telefono, cornetta)
         elif comando == "clienti":
             clienti.Main(telefono, cornetta)
+        elif comando == "camere":
+            camere.Main(telefono, cornetta)
+        elif comando == "prenotazioni":
+            prenotazioni.Main(telefono, cornetta)
         elif comando == "exit":
             inEsecuzione = False
         else:
