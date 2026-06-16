@@ -1,0 +1,54 @@
+﻿@page "/tavoli"
+@using Maui01.Strutture;
+@inject BancaDati db;
+
+<h3>Tavoli</h3>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Posti</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Tavolo singolo in db.tavoli)
+            {
+                <tr>
+                    <td>@singolo.Nome</td>
+                    <td>@singolo.Posti</td>
+                    <td><span class="btn btn-danger" @onclick="e => Cancella(singolo)">cancella</span></td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td><input class="form-control" @bind="nuovo.Nome" /></td>
+                <td><input type="number" class="form-control" @bind="nuovo.Posti" /></td>
+                <td>
+                    <span class="btn btn-success" @onclick="Aggiungi">aggiungi</span>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+    
+@code {
+    private Tavolo nuovo = new Tavolo();
+
+    private void Aggiungi()
+    {
+        db.tavoli.Add(nuovo);
+        db.Save();
+        nuovo = new Tavolo();
+    }
+
+    private void Cancella(Tavolo daCancella)
+    {
+        db.tavoli.Remove(daCancella);
+        db.Save();
+    }
+}

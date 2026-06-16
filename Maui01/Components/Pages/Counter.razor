@@ -1,0 +1,16 @@
+﻿@page "/presenze"
+
+<h1>Presenze</h1>
+
+<p role="status">Current count: @conteggio</p>
+
+<button class="btn btn-primary" @onclick="Incrementa">Click me</button>
+
+@code {
+    private int conteggio = 0;
+
+    private void Incrementa()
+    {
+        conteggio++;
+    }
+}
