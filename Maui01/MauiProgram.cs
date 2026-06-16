@@ -16,7 +16,7 @@ namespace Maui01
                 });
 
             builder.Services.AddMauiBlazorWebView();
-            builder.Services.AddSingleton<BancaDati>();
+            builder.Services.AddSingleton<BancaDati>( BancaDati.Load() );
 #if DEBUG
     		builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();

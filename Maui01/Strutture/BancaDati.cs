@@ -8,18 +8,19 @@ namespace Maui01.Strutture
     public class BancaDati
     {
         public List<Tavolo> tavoli { get; set; } = new List<Tavolo>();
-        private readonly string percorso = Path.Combine(FileSystem.AppDataDirectory, "db.json");
+        public List<Piatto> piatti { get; set; } = new List<Piatto>();
 
-        public BancaDati()
+        private static readonly string percorso = Path.Combine(FileSystem.AppDataDirectory, "db.json");
+
+        public static BancaDati Load()
         {
             if (File.Exists(percorso))
             {
                 BancaDati? copia = JsonSerializer.Deserialize<BancaDati>(File.ReadAllText(percorso));
-                if(copia != null)
-                {
-                    this.tavoli = copia.tavoli;
-                }
+                if (copia != null)
+                    return copia; 
             }
+            return new BancaDati();
         }
 
         public void Save()
