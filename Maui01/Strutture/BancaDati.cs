@@ -16,7 +16,7 @@ namespace Maui01.Strutture
         {
             if (File.Exists(percorso))
             {
-                BancaDati? copia = JsonSerializer.Deserialize<BancaDati>(File.ReadAllText(percorso));
+                BancaDati? copia = JsonSerializer.Deserialize<BancaDati>( File.ReadAllText(percorso) );
                 if (copia != null)
                     return copia; 
             }
