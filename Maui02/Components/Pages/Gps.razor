@@ -1,0 +1,69 @@
+﻿@page "/gps"
+
+<h3>Gps</h3>
+<p>
+    Qui sotto puoi leggere le tue attuali coordinate GPS.<br />
+    Ricorda che sono espresse come latitudine e longitudine con sistema
+    di riferimento WGS84.
+</p>
+<div class="row">
+    <div class="col-md-6">Latitudine</div>
+    <div class="col-md-6 text-end"> @lat &deg; </div>
+    <div class="col-md-6">Longitudine</div>
+    <div class="col-md-6 text-end"> @lng &deg; </div>
+</div>
+
+<div class="btn btn-success w-100" @onclick="Aggiorna">Aggiorna</div>
+
+@code {
+    // la nostra posizione
+    private double lat;
+    private double lng;
+
+    private async void Aggiorna()
+    {
+        Location? dove = await Geolocation.Default.GetLastKnownLocationAsync();
+        if(dove != null)
+        {
+            lat = dove.Latitude;
+            lng = dove.Longitude;
+            Previsioni? meteo = await DammiMeteo();
+            StateHasChanged();
+        }
+    }
+
+    private async Task<Previsioni?> DammiMeteo()
+    {
+        string dotLat = lat.ToString().Replace(',', '.');
+        string dotLng = lng.ToString().Replace(',', '.');
+        string url = "https://api.open-meteo.com/v1/forecast?" +
+                    $"latitude={dotLat}&" +
+                    $"longitude={dotLng}&" +
+                    "current=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,weather_code,precipitation";
+        HttpClient client = new HttpClient();
+        HttpResponseMessage risposta = await client.GetAsync(url);
+        if (risposta.IsSuccessStatusCode)
+        {
+            string previsioni = await risposta.Content.ReadAsStringAsync();
+            return System.Text.Json.JsonSerializer.Deserialize<Previsioni>(previsioni);
+        }
+        return null;
+    }
+
+    public class Previsioni
+    {
+        public float elevation { get; set; }
+        public Current? current { get; set; }
+    }
+
+    public class Current
+    {
+        public float temperature_2m { get; set; }
+        public float relative_humidity_2m { get; set; }
+        public float wind_speed_10m { get; set; }
+        public float wind_direction_10m { get; set; }
+        public int weather_code { get; set; }
+        public float precipitation { get; set; }
+    }
+
+}
