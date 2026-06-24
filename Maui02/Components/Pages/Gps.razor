@@ -1,4 +1,5 @@
 ﻿@page "/gps"
+@using System.Text.Json
 
 <h3>Gps</h3>
 <p>
@@ -8,34 +9,45 @@
 </p>
 <div class="row">
     <div class="col-md-6">Latitudine</div>
-    <div class="col-md-6 text-end"> @lat &deg; </div>
+    <div class="col-md-6 text-end"> @meteo?.Lat &deg; </div>
     <div class="col-md-6">Longitudine</div>
-    <div class="col-md-6 text-end"> @lng &deg; </div>
+    <div class="col-md-6 text-end"> @meteo?.Lng &deg; </div>
+    <div class="col-md-6">Accuracy</div>
+    <div class="col-md-6 text-end"> @meteo?.Accuracy mt </div>
+    <div class="col-md-6">Elevation</div>
+    <div class="col-md-6 text-end"> @meteo?.elevation mt </div>
+    <div class="col-md-6">Temperatura</div>
+    <div class="col-md-6 text-end"> @meteo?.current?.temperature_2m &deg; </div>
+    <div class="col-md-6">Umidità</div>
+    <div class="col-md-6 text-end"> @meteo?.current?.relative_humidity_2m % </div>
 </div>
 
 <div class="btn btn-success w-100" @onclick="Aggiorna">Aggiorna</div>
 
 @code {
     // la nostra posizione
-    private double lat;
-    private double lng;
+    private Previsione? meteo;
 
     private async void Aggiorna()
     {
         Location? dove = await Geolocation.Default.GetLastKnownLocationAsync();
         if(dove != null)
         {
-            lat = dove.Latitude;
-            lng = dove.Longitude;
-            Previsioni? meteo = await DammiMeteo();
+            meteo = await DammiMeteo(dove);
+            if (meteo == null)
+                meteo = new Previsione();
+            meteo.Lat = dove.Latitude;
+            meteo.Lng = dove.Longitude;
+            meteo.Speed = dove.Speed;
+            meteo.Accuracy = dove.Accuracy;
             StateHasChanged();
         }
     }
 
-    private async Task<Previsioni?> DammiMeteo()
+    private async Task<Previsione?> DammiMeteo(Location posizione)
     {
-        string dotLat = lat.ToString().Replace(',', '.');
-        string dotLng = lng.ToString().Replace(',', '.');
+        string dotLat = posizione.Latitude.ToString().Replace(',', '.');
+        string dotLng = posizione.Longitude.ToString().Replace(',', '.');
         string url = "https://api.open-meteo.com/v1/forecast?" +
                     $"latitude={dotLat}&" +
                     $"longitude={dotLng}&" +
@@ -45,13 +57,18 @@
         if (risposta.IsSuccessStatusCode)
         {
             string previsioni = await risposta.Content.ReadAsStringAsync();
-            return System.Text.Json.JsonSerializer.Deserialize<Previsioni>(previsioni);
+            return JsonSerializer.Deserialize<Previsione>(previsioni);
         }
         return null;
     }
 
-    public class Previsioni
+    public class Previsione
     {
+        public DateTime Quando { get; set; } = DateTime.Now;
+        public double Lat { get; set; }
+        public double Lng { get; set; }
+        public double? Accuracy { get; set; }
+        public double? Speed { get; set; }
         public float elevation { get; set; }
         public Current? current { get; set; }
     }
