@@ -1,0 +1,36 @@
+﻿@page "/bussola"
+@using Microsoft.Maui.Devices.Sensors
+<h3>Bussola</h3>
+
+<div class="text-center"> @( (MarkupString)direzione ) </div>
+
+<div class="btn btn-primary w-100" @onclick="AttivaBussola">attiva</div>
+
+@code {
+
+    private string direzione = "0 &deg;";
+
+    private void AttivaBussola()
+    {
+        if (Compass.Default.IsSupported)
+        {
+            if (Compass.Default.IsMonitoring)
+            {
+                Compass.Default.Stop();
+            } else
+            {
+                Compass.Default.ReadingChanged += DirezioneModificata;
+                Compass.Default.Start(SensorSpeed.Default);
+            }            
+        } else
+        {
+            direzione = "Su questo device non è presente la bussola";
+        }      
+    }
+
+    private void DirezioneModificata(object sensore, CompassChangedEventArgs evt)
+    {
+        direzione = $"{evt.Reading.HeadingMagneticNorth:N5} &deg;";
+    }
+
+}

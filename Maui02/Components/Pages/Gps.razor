@@ -7,26 +7,41 @@
     Ricorda che sono espresse come latitudine e longitudine con sistema
     di riferimento WGS84.
 </p>
-<div class="row">
-    <div class="col-md-6">Latitudine</div>
-    <div class="col-md-6 text-end"> @meteo?.Lat &deg; </div>
-    <div class="col-md-6">Longitudine</div>
-    <div class="col-md-6 text-end"> @meteo?.Lng &deg; </div>
-    <div class="col-md-6">Accuracy</div>
-    <div class="col-md-6 text-end"> @meteo?.Accuracy mt </div>
-    <div class="col-md-6">Elevation</div>
-    <div class="col-md-6 text-end"> @meteo?.elevation mt </div>
-    <div class="col-md-6">Temperatura</div>
-    <div class="col-md-6 text-end"> @meteo?.current?.temperature_2m &deg; </div>
-    <div class="col-md-6">Umidità</div>
-    <div class="col-md-6 text-end"> @meteo?.current?.relative_humidity_2m % </div>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Lat</th>
+                <th>Lng</th>
+                <th>Alt</th>
+                <th>C&deg;</th>
+                <th>Hum. %</th>
+                <th>Wind kmh</th>
+                <th>Wind &deg;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Previsione singola in storico)
+            {
+                <tr>
+                    <td>@singola.Lat.ToString("N5")</td>
+                    <td>@singola.Lng.ToString("N5")</td>
+                    <td>@singola.elevation</td>
+                    <td>@singola.current?.temperature_2m</td>
+                    <td>@singola.current?.relative_humidity_2m</td>
+                    <td>@singola.current?.wind_speed_10m</td>
+                    <td>@singola.current?.wind_direction_10m</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
 <div class="btn btn-success w-100" @onclick="Aggiorna">Aggiorna</div>
 
 @code {
     // la nostra posizione
-    private Previsione? meteo;
     private List<Previsione> storico = new List<Previsione>();
 
     private async void Aggiorna()
@@ -34,13 +49,16 @@
         Location? dove = await Geolocation.Default.GetLastKnownLocationAsync();
         if(dove != null)
         {
-            meteo = await DammiMeteo(dove);
+            Previsione? meteo = await DammiMeteo(dove);
             if (meteo == null)
                 meteo = new Previsione();
             meteo.Lat = dove.Latitude;
             meteo.Lng = dove.Longitude;
             meteo.Speed = dove.Speed;
             meteo.Accuracy = dove.Accuracy;
+
+            storico.Add(meteo);
+
             StateHasChanged();
         }
     }

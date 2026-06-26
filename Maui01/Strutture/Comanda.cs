@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Xamarin.Google.Crypto.Tink.Signature;
 
 namespace Maui01.Strutture
 {
