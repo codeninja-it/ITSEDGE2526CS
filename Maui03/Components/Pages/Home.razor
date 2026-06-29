@@ -1,30 +1,26 @@
 ﻿@page "/"
-@using MauiWifiManager
-@using MauiWifiManager.Abstractions
+@using static Maui03.WifiScanner
 
 <h1>Scanner Wifi</h1>
 <p>Qui sotto trovi in tabella le reti wifi attualmente in vista!</p>
 
 <ul>
-    @foreach(NetworkData rete in reti)
+    @foreach (Rete rete in reti)
     {
-        <li> @rete.Ssid ( @rete.ChannelNumber ) : @rete.SignalStrength ( @rete.RssiDbm Dbm ) </li>
+        <li> @rete.MacAddress, @rete.Ssid ( @rete.Channel ) : @rete.Rssi dBm </li>
     }
 </ul>
 
 <div class="btn btn-primary w-100" @onclick="Scansiona">refresh</div>
 
 @code{
-    private List<NetworkData> reti = new List<NetworkData>();
+    private List<Rete> reti = new List<Rete>();
 
     private async Task Scansiona()
     {
-        WifiManagerResponse<List<NetworkData>> risultato = await CrossWifiManager.Current.ScanWifiNetworksAsync();
-        if (risultato.Data != null)
-            reti = risultato.Data;
+        var scanner = new WifiScanner();
+        reti = await scanner.GetAllNearbyNetworksAsync();
         StateHasChanged();
-
-
     }
 
 }

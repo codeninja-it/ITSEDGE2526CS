@@ -1,5 +1,4 @@
-﻿using MauiWifiManager;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
 namespace Maui03
 {
@@ -13,9 +12,6 @@ namespace Maui03
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
-
-            // attivo libreria per gestire la scheda di rete
-            builder.UseMauiWifiManager();
 
             builder.Services.AddMauiBlazorWebView();
 
