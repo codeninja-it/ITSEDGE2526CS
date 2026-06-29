@@ -4,23 +4,42 @@
 <h1>Scanner Wifi</h1>
 <p>Qui sotto trovi in tabella le reti wifi attualmente in vista!</p>
 
-<ul>
-    @foreach (Rete rete in reti)
-    {
-        <li> @rete.MacAddress, @rete.Ssid ( @rete.Channel ) : @rete.Rssi dBm </li>
-    }
-</ul>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>macAddress</th>
+                <th>SSID</th>
+                <th class="text-end">Distanza</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Rete rete in reti)
+            {
+                <tr>
+                    <td>@rete.MacAddress</td>
+                    <td>@rete.Ssid</td>
+                    <td class="text-end">@rete.Distanza.ToString("N2") mt</td>
+                </tr>
+            }
+        </tbody>
+    </table>    
+</div>
 
-<div class="btn btn-primary w-100" @onclick="Scansiona">refresh</div>
+@contatore
 
 @code{
     private List<Rete> reti = new List<Rete>();
+    private WifiScanner scanner = new WifiScanner();
+    private Orologio timer = new Orologio(1000);
+    private int contatore = 0;
 
-    private async Task Scansiona()
+    protected override async Task OnInitializedAsync()
     {
-        var scanner = new WifiScanner();
         reti = await scanner.GetAllNearbyNetworksAsync();
-        StateHasChanged();
+        // timer.Start(() =>
+        // {
+        //     contatore++;
+        // });
     }
-
 }

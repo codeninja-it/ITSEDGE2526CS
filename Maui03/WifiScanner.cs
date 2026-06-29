@@ -17,6 +17,7 @@ namespace Maui03
             public int SignalQuality { get; set; }
             public double FrequencyKhz { get; set; }
             public string Channel { get; set; }
+            public double Distanza => Math.Pow(10, (double)(-36 - Rssi)/21.0 );
         }
 
         public async Task<List<Rete>> GetAllNearbyNetworksAsync()
@@ -68,7 +69,7 @@ namespace Maui03
                 }
             }
 
-            return trovate.OrderByDescending(n => n.Rssi).ToList();
+            return trovate.OrderBy(n => n.Distanza).ToList();
         }
 
         private void crossReadCache(List<Rete> list)
