@@ -1,0 +1,41 @@
+﻿@page "/calcolatrice"
+
+<h1>Calcolatrice distanze</h1>
+
+<div>
+    <label for="rumore">Rumore dell'access-point</label><br/>
+    <input id="rumore" type="number" class="form-control" placeholder="dBm..." @bind="rumoreAttuale" />
+</div>
+
+<div>
+    <label for="mezzo">Costante del mezzo</label>
+    <input id="mezzo" type="number" step="0.1" class="form-control" @bind="costanteMezzo" />
+</div>
+
+<div>
+    <label>Rumore a 1 mt</label>
+    <input type="number" class="form-control" @bind="dist1mt" />
+</div>
+
+<div class="btn btn-primary w-100" @onclick="Calcola">calcola</div>
+
+<p class="text-center m-5 fs-5"> @distanza.ToString("N2") mt </p>
+
+@code {
+
+    private int dist1mt = -36; // rumore emesso all'incirca da un device wifi 802.11 a 2.4Ghz
+    private double costanteMezzo = 2.1;  // costante di attraversamento dell'aria di città
+
+    private int rumoreAttuale;
+
+    private double distanza;
+
+    private void Calcola()
+    {
+        int delta = dist1mt - rumoreAttuale;
+        double attraversamento = 10 * costanteMezzo;
+
+        distanza = Math.Pow(10, delta / attraversamento);
+    }
+
+}
