@@ -7,13 +7,6 @@ using ManagedNativeWifi;
 
 namespace Maui03
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using ManagedNativeWifi;
-
     public class WifiScanner
     {
         public class Rete
