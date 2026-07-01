@@ -1,0 +1,265 @@
+﻿{
+  "Scenario": "Classification",
+  "DataSource": {
+    "Version": 3,
+    "EscapeCharacter": "\"",
+    "ReadMultiLines": false,
+    "KeepDiacritics": false,
+    "KeepPunctuations": false,
+    "AllowQuoting": false,
+    "Type": "TabularFile",
+    "FilePath": "C:\\Users\\dsimo\\OneDrive\\Desktop\\ZCS\\datasets\\github\\issues_train.tsv",
+    "Delimiter": "\t",
+    "DecimalMarker": ".",
+    "HasHeader": true,
+    "ColumnProperties": [
+      {
+        "ColumnName": "ID",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Area",
+        "ColumnPurpose": "Label",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Title",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Description",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      }
+    ]
+  },
+  "Environment": {
+    "Type": "LocalCPU",
+    "Version": 1
+  },
+  "RunHistory": {
+    "Version": 3,
+    "Type": "Result",
+    "Trials": [
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "SdcaMaximumEntropyMulti",
+        "Score": 0.2803193122505373,
+        "RuntimeInSeconds": 6.644,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e5",
+          "e0": {
+            "InputColumnName": "Description",
+            "OutputColumnName": "Description"
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Description"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e2": {
+            "OutputColumnName": "Area",
+            "InputColumnName": "Area",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e3": {
+            "L1Regularization": 1.0,
+            "L2Regularization": 0.1,
+            "LabelColumnName": "Area",
+            "FeatureColumnName": "Features"
+          },
+          "e5": {
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "SdcaMaximumEntropyMulti",
+        "Score": 0.2803193122505373,
+        "RuntimeInSeconds": 5.611,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e5",
+          "e0": {
+            "InputColumnName": "Description",
+            "OutputColumnName": "Description"
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Description"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e2": {
+            "OutputColumnName": "Area",
+            "InputColumnName": "Area",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e3": {
+            "L1Regularization": 0.41633776,
+            "L2Regularization": 0.034155857,
+            "LabelColumnName": "Area",
+            "FeatureColumnName": "Features"
+          },
+          "e5": {
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "SdcaLogisticRegressionOva",
+        "Score": 0.2803193122505373,
+        "RuntimeInSeconds": 79.372,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e4 * e5",
+          "e0": {
+            "InputColumnName": "Description",
+            "OutputColumnName": "Description"
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Description"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e2": {
+            "OutputColumnName": "Area",
+            "InputColumnName": "Area",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e4": {
+            "L1Regularization": 1.0,
+            "L2Regularization": 0.1,
+            "LabelColumnName": "Area",
+            "FeatureColumnName": "Features"
+          },
+          "e5": {
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "SdcaMaximumEntropyMulti",
+        "Score": 0.2803193122505373,
+        "RuntimeInSeconds": 6.407,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e5",
+          "e0": {
+            "InputColumnName": "Description",
+            "OutputColumnName": "Description"
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Description"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e2": {
+            "OutputColumnName": "Area",
+            "InputColumnName": "Area",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e3": {
+            "L1Regularization": 2.401896,
+            "L2Regularization": 0.29277557,
+            "LabelColumnName": "Area",
+            "FeatureColumnName": "Features"
+          },
+          "e5": {
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "SdcaLogisticRegressionOva",
+        "Score": 0.2803193122505373,
+        "RuntimeInSeconds": 86.393,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e4 * e5",
+          "e0": {
+            "InputColumnName": "Description",
+            "OutputColumnName": "Description"
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Description"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e2": {
+            "OutputColumnName": "Area",
+            "InputColumnName": "Area",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e4": {
+            "L1Regularization": 0.5045967,
+            "L2Regularization": 0.03125,
+            "LabelColumnName": "Area",
+            "FeatureColumnName": "Features"
+          },
+          "e5": {
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
+          }
+        }
+      }
+    ],
+    "Estimators": {
+      "e0": "FeaturizeText",
+      "e1": "Concatenate",
+      "e2": "MapValueToKey",
+      "e3": "SdcaMaximumEntropyMulti",
+      "e4": "SdcaLogisticRegressionOva",
+      "e5": "MapKeyToValue"
+    },
+    "Schema": "e0 * e1 * e2 * (e3 + e4) * e5",
+    "MetricName": "MicroAccuracy",
+    "ModelFilePath": "C:\\Users\\dsimo\\source\\repos\\ITSEDGE2526\\Maui04\\Riconoscitore.mlnet"
+  },
+  "Type": "TrainingConfig",
+  "Version": 5,
+  "TrainingOption": {
+    "Version": 2,
+    "Subsampling": false,
+    "Tuner": "eci-cfo",
+    "Type": "ClassificationTrainingOption",
+    "TrainingTime": 600,
+    "OptimizeMetric": "MicroAccuracy",
+    "LabelColumn": "Area",
+    "AvailableTrainers": [
+      "SDCA"
+    ],
+    "ValidationOption": {
+      "Version": 0,
+      "Type": "FileValidationOption",
+      "FilePath": "C:\\Users\\dsimo\\OneDrive\\Desktop\\ZCS\\datasets\\github\\issues_test.tsv"
+    }
+  }
+}
