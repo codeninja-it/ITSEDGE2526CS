@@ -47,6 +47,8 @@ var modello = ricetta.Fit(dati);
 
 // 5. salvandolo su disco
 // contesto.Model.Save(modello, dati.Schema, "c:\\test\\sicurezza.mlnet");
+// 5.1. o leggendolo da disco
+// modello = contesto.Model.Load("c:\\test\\sicurezza.mlnet", out _);
 
 PredictionEngine<DatiIngresso, DatiUscita> motore = contesto
     .Model
