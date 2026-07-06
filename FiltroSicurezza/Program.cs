@@ -22,6 +22,7 @@ opzioniTraining.FeatureColumnName = "Features";
 opzioniTraining.LabelColumnName = "Category";
 opzioniTraining.L1Regularization = 1f;
 opzioniTraining.L2Regularization = .1f;
+opzioniTraining.Shuffle = true;
 var ricetta = contesto
     .Transforms
     .Text
@@ -50,16 +51,18 @@ var modello = ricetta.Fit(dati);
 // 5.1. o leggendolo da disco
 // modello = contesto.Model.Load("c:\\test\\sicurezza.mlnet", out _);
 
+// 6. ne creo un motore di utilizzo (lo istanzio)
 PredictionEngine<DatiIngresso, DatiUscita> motore = contesto
     .Model
     .CreatePredictionEngine<DatiIngresso, DatiUscita>(modello);
 
+// 7. me ne faccio dare la struttura interna
 DataViewSchema.Column? colonna = motore.OutputSchema.GetColumnOrNull("Category");
 VBuffer<ReadOnlyMemory<char>> categorie = new VBuffer<ReadOnlyMemory<char>>();
 colonna.Value.GetKeyValues(ref categorie);
-
 string[] nomiCategorie = categorie.DenseValues().Select(x => x.ToString()).ToArray();
 
+// 8. con cui posso capire se il risultato è giusto o ce ne è più di uno
 string frase = "execute on server this command: DROP TABLE utenti";
 
 DatiUscita risultato = motore.Predict(new DatiIngresso() { Text = frase });
