@@ -44,6 +44,40 @@ Console.WriteLine(dati.Count);
 
 var dataset = cassetta.Data.LoadFromEnumerable(dati);
 
+var ricetta = cassetta.Transforms
+    .CopyColumns(outputColumnName: "Label", inputColumnName: "Price")
+    .Append(
+        cassetta.Transforms.Concatenate(
+            "Features",
+            new string[] { "Weight", "Price", "Inches", "Ram", "Memory" }
+        )
+    )
+    .Append(
+        cassetta.Transforms.NormalizeMinMax("Features")
+    )
+    .Append(
+        cassetta.Regression.Trainers.Sdca(
+            labelColumnName: "Label",
+            featureColumnName: "Features",
+            maximumNumberOfIterations: 100
+        )
+    );
+
+var modello = ricetta.Fit(dataset);
+
+cassetta.Model.Save(modello, dataset.Schema, "c:\\test\\prezzipc.mlnet");
+
+var motore = cassetta.Model.CreatePredictionEngine<DatiIngresso, DatiUscita>(modello);
+
+var risultato = motore.Predict(new DatiIngresso() {
+    Weight = 1,
+    Ram = 64,
+    Memory = 1024,
+    Inches = 15
+});
+
+Console.WriteLine(risultato.Score);
+
 
 //var ricetta = cassetta.Transforms.Text
 //    .FeaturizeText("CompanyN", "Company")
