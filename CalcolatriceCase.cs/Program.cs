@@ -1,9 +1,10 @@
-﻿// dichiaro l'uso di ML.Net e creo una cassetta degli attrezzi
-using CalcolatriceCase;
+﻿using CalcolatriceCase.dati;
 using Microsoft.ML;
-using System.Text.RegularExpressions;
+
+// dichiaro l'uso di ML.Net e creo una cassetta degli attrezzi
 MLContext cassetta = new MLContext();
 
+// carico i dati
 string[] righe = File.ReadAllLines("C:\\test\\Real estate list.csv");
 List<Ingresso> dati = new List<Ingresso>();
 for (int i = 1; i < righe.Length; i++)
@@ -21,9 +22,10 @@ for (int i = 1; i < righe.Length; i++)
         Piscina = int.Parse(celle[8]),
     });
 }
-
+// verifico quante righe ho importato
 Console.WriteLine(dati.Count);
 
+// creo il dataset
 var dataset = cassetta.Data.LoadFromEnumerable(dati);
 
 var ricetta = cassetta.Transforms.Text

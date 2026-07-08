@@ -1,4 +1,4 @@
-﻿namespace CalcolatriceCase
+﻿namespace CalcolatriceCase.dati
 {
     public class Ingresso
     {
