@@ -9,15 +9,11 @@ namespace CalcolatricePC
 {
     public class DatiIngresso
     {
-        [LoadColumn(3), ColumnName("Inches")]
-        public float Inches { get; set; }
-        [LoadColumn(6), ColumnName("Ram")]
+        public string Marca { get; set; }
+        public float Pollici { get; set; }
         public float Ram { get; set; }
-        [LoadColumn(7), ColumnName("Memory")]
-        public float Memory { get; set; }
-        [LoadColumn(10), ColumnName("Weight")]
-        public float Weight { get; set; }
-        [LoadColumn(11), ColumnName("Price")]
-        public float Price { get; set; }
+        public float Disco { get; set; }
+        public float Peso { get; set; }
+        public float Prezzo { get; set; }
     }
 }

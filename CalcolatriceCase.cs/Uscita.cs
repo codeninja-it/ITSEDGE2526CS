@@ -1,13 +1,12 @@
-﻿using Microsoft.ML.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CalcolatricePC
+namespace CalcolatriceCase
 {
-    public class DatiUscita
+    public class Uscita
     {
         public float Score { get; set; }
     }
