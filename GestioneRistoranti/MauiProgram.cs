@@ -18,6 +18,7 @@ namespace GestioneRistoranti
 
 #if DEBUG
     		builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Services.AddSingleton<Middleware>();
     		builder.Logging.AddDebug();
 #endif
 
